@@ -14,7 +14,7 @@
 - I stick to the design material I knew (Material UI) and some part of the code was already given and I believe that comments where needed here. however here is the documentation (https://material-ui.com/demos/tables/)
 - A further check whether double or single quotes are consistent was needed
 
-#What I will do in the future
+## What I will do in the future
 
 - I want to first grasb the best practices of the development team (that I am working with) in term of code structure and cleaness, and I want to learn from them what is the best way to deliver clean code (every company might have different standard) and I want to increasingly  adapt to the norms agreed. 
 - I am really eager to learn what is the best way to make a scalable code
