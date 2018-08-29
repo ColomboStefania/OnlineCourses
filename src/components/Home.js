@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import compose from 'recompose/compose';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import {  getCourses } from '../actions/fetchCourses';
+import { getCourses } from '../actions/fetchCourses';
 import './Home.css';
 
 const styles = theme => ({
@@ -32,7 +32,6 @@ const styles = theme => ({
 class Home extends PureComponent {
   UNSAFE_componentWillMount() {
     this.props.getCourses();
-
   }
 
   render() {
@@ -42,7 +41,7 @@ class Home extends PureComponent {
         <div>
           <div className="titleContainer">
             <Typography variant="display2" align="center" gutterBottom>
-            UX, UI, and Web Development Courses Online
+              UX, UI, and Web Development Courses Online
             </Typography>
           </div>
           <div />
@@ -81,17 +80,16 @@ class Home extends PureComponent {
                 <p className="playing">ONLINE COURSES</p>
               </Link>
             </Button>
-
-            
-
           </div>
           <br />
- 
+
           <div className="paragraph">
-         
             <h2>Job guarantee</h2>
             <p>
-            We know how challenging changing careers can be. Our Career Change Courses are designed as whole learning experiences to support your journey from the first exercise to a new career. We back it with a job guarantee for your peace of mind.
+              We know how challenging changing careers can be. Our Career Change
+              Courses are designed as whole learning experiences to support your
+              journey from the first exercise to a new career. We back it with a
+              job guarantee for your peace of mind.
             </p>
           </div>
           <div className="paragraph">
@@ -108,7 +106,6 @@ class Home extends PureComponent {
           </div>
 
           <div className="footer" />
-          <span style={{ opacity: 0.5 }}>Powered by ETHLend</span>
         </div>
       </div>
     );
@@ -122,7 +119,6 @@ Home.propTypes = {
 const mapStateToProps = function(state) {
   return {
     getCourses: state.getCourses,
-
   };
 };
 
@@ -130,6 +126,6 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    {  getCourses },
+    { getCourses },
   ),
 )(Home);

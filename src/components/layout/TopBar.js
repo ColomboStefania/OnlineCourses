@@ -28,7 +28,7 @@ const TopBar = props => {
     <AppBar position="absolute" style={{ zIndex: 10 }}>
       <Toolbar>
         <Typography variant="title" color="inherit" style={{ flex: 1 }}>
-        CareerFoundry
+          CareerFoundry
         </Typography>
 
         <Button>

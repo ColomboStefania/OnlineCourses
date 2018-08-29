@@ -12,13 +12,10 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import compose from 'recompose/compose';
-import './OnlineCourses.css'
+import './OnlineCourses.css';
 import blue from '@material-ui/core/colors/blue';
 
-import { getCourses , getDetail } from '../actions/fetchCourses';
-
-
-
+import { getCourses, getDetail } from '../actions/fetchCourses';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -37,7 +34,6 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
- 
   {
     id: 'Course',
     numeric: false,
@@ -45,7 +41,12 @@ const rows = [
     label: 'Course',
   },
   { id: 'author', numeric: false, disablePadding: false, label: 'Author' },
-  { id: 'next_start_formatted', numeric: false, disablePadding: false, label: 'Starting date' },
+  {
+    id: 'next_start_formatted',
+    numeric: false,
+    disablePadding: false,
+    label: 'Starting date',
+  },
   { id: 'detail', numeric: false, disablePadding: false, label: 'Details' },
 ];
 
@@ -74,9 +75,9 @@ class EnhancedTableHead extends React.Component {
                   enterDelay={300}
                 >
                   <TableSortLabel
-                    // active={orderBy === row.id}
-                    // direction={order}
-                    // onClick={this.createSortHandler(row.id)}
+                  // active={orderBy === row.id}
+                  // direction={order}
+                  // onClick={this.createSortHandler(row.id)}
                   >
                     {row.label}
                   </TableSortLabel>
@@ -123,8 +124,8 @@ const styles = theme => ({
     marginBottom: 12,
   },
   button: {
-    backgroundColor: blue
-  }
+    backgroundColor: blue,
+  },
 });
 
 class OnlineCourses extends React.Component {
@@ -137,12 +138,8 @@ class OnlineCourses extends React.Component {
   };
 
   UNSAFE_componentWillMount() {
-    
     this.props.getCourses();
-
   }
-
-
 
   UNSAFE_componentWillReceiveProps(newProps) {
     this.setState({ Courses: newProps.Courses });
@@ -152,14 +149,12 @@ class OnlineCourses extends React.Component {
     return Object.keys(data).map(course => {
       return {
         title: data[course].title,
-        url: data[course].url, 
+        url: data[course].url,
         author: data[course].author,
         Price: data[course].price,
-        next_start_formatted: data[course].next_start_formatted
-      }
-
-    })
-
+        next_start_formatted: data[course].next_start_formatted,
+      };
+    });
   }
 
   handleRequestSort = (event, property) => {
@@ -173,37 +168,23 @@ class OnlineCourses extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const {
-      Courses,
-      order,
-      orderBy,
-      rowsPerPage,
-      page,
-    } = this.state;
+    const { Courses, order, orderBy, rowsPerPage, page } = this.state;
 
-    if (!Courses) return null
-    
+    if (!Courses) return null;
 
-    const formattedData = this.getFormattedData(Courses)
+    const formattedData = this.getFormattedData(Courses);
 
     const emptyRows =
       rowsPerPage -
-      Math.min(
-        rowsPerPage,
-        Object.keys(Courses).length - page * rowsPerPage,
-      );
-
-
+      Math.min(rowsPerPage, Object.keys(Courses).length - page * rowsPerPage);
 
     return (
-  
       <Paper className={classes.root}>
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
               order={order}
               orderBy={orderBy}
-              
               onRequestSort={this.handleRequestSort}
               rowCount={Object.keys(Courses).length}
             />
@@ -214,72 +195,77 @@ class OnlineCourses extends React.Component {
                 .map(course => {
                   return (
                     <TableRow hover tabIndex={-1} key={course.name}>
-                      <TableCell component="th" scope="row" padding="dense" >
+                      <TableCell component="th" scope="row" padding="dense">
                         {course.title}
                       </TableCell>
-               
-                      <TableCell >
-                        {course.author}
-                      </TableCell>
-                      <TableCell >
-                        {course.next_start_formatted}
-                      </TableCell>
-                      <Button onClick={() => { this.props.getDetail(course.title.replace(/ /g,"-").toLowerCase()); }}>Click for more details</Button>
 
+                      <TableCell>{course.author}</TableCell>
+                      <TableCell>{course.next_start_formatted}</TableCell>
+                      <Button
+                        onClick={() => {
+                          this.props.getDetail(
+                            course.title.replace(/ /g, '-').toLowerCase(),
+                          );
+                        }}
+                      >
+                        Click for more details
+                      </Button>
                     </TableRow>
                   );
                 })}
               {emptyRows > 0 && (
-                <TableRow style={{ height: 49 * emptyRows}}>
+                <TableRow style={{ height: 49 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}
             </TableBody>
           </Table>
         </div>
-        <br/>
-        <br/>
-        <br/>
-        {this.props.detail && this.props.detail.slug &&
-        <div className="detailContainer">
+        <br />
+        <br />
+        <br />
+        {this.props.detail &&
+          this.props.detail.slug && (
+            <div className="detailContainer">
+              <div>
+                <div className="title">
+                  <h1>
+                    {this.props.detail.slug.toUpperCase().replace(/-/g, ' ')}
+                  </h1>
+                </div>
+              </div>
 
-        <div>
-    
-          <div className= "title">
-          <h1>{this.props.detail.slug.toUpperCase().replace(/-/g, ' ')}</h1>
-          </div>
-
-          </div>
-         
-            <div className= "price">
-              <h2>{this.props.detail.price.EU.all_upfront} upfront - save {this.props.detail.price.EU.upfront_savings}</h2>
-              <p>{this.props.detail.price.EU.upfront} upfront - save {this.props.detail.price.EU.installment}</p>
-</div>
-<div className= "date">
-          <ul className="DateList"> 
-          <h2>Next starting dates</h2>
-          {this.props.detail.start_dates.map(function(date) {
-            return <li key={date}>{date}</li>
-          })}
-            </ul>
+              <div className="price">
+                <h2>
+                  {this.props.detail.price.EU.all_upfront} upfront - save{' '}
+                  {this.props.detail.price.EU.upfront_savings}
+                </h2>
+                <p>
+                  {this.props.detail.price.EU.upfront} upfront - save{' '}
+                  {this.props.detail.price.EU.installment}
+                </p>
+              </div>
+              <div className="date">
+                <ul className="DateList">
+                  <h2>Next starting dates</h2>
+                  {this.props.detail.start_dates.map(function(date) {
+                    return <li key={date}>{date}</li>;
+                  })}
+                </ul>
+              </div>
+              <button className="differentCoursePlan">Get Course Plan</button>
+              <button className="buttonEnroll">Enroll</button>
+              <div className="footerCard" />
             </div>
-<button className="differentCoursePlan">Get Course Plan</button>
-<button className="buttonEnroll">Enroll</button>
-<div className= "footerCard"></div>
-      </div>
-     
-      }
+          )}
       </Paper>
-
-  
     );
- 
   }
 }
 const mapStateToProps = function(state) {
   return {
     Courses: state.getCourses,
-    detail: state.getDetail
+    detail: state.getDetail,
   };
 };
 

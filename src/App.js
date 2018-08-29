@@ -5,7 +5,6 @@ import OnlineCourses from './components/OnlineCourses';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import TopBar from './components/layout/TopBar';
 
-
 class App extends Component {
   render() {
     return (
@@ -18,7 +17,6 @@ class App extends Component {
             <Route exact path="/" render={() => <Redirect to="/home" />} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/OnlineCourses" component={OnlineCourses} />
-
           </main>
         </div>
       </Router>
