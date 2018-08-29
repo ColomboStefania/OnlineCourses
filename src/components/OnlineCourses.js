@@ -157,7 +157,7 @@ class OnlineCourses extends React.Component {
         Price: data[course].price,
         next_start_formatted: data[course].next_start_formatted
       }
-      console.log(this.state)
+
     })
 
   }
@@ -193,7 +193,7 @@ class OnlineCourses extends React.Component {
         Object.keys(Courses).length - page * rowsPerPage,
       );
 
-  const bull = <span className={classes.bullet}>•</span>;
+
 
     return (
   

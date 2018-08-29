@@ -1,5 +1,5 @@
 import request from 'superagent';
-import { baseUrl } from '../constants';
+
 
 
 export const GET_COURSES = 'GET_COURSES';
